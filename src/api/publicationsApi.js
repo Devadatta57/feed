@@ -118,14 +118,21 @@ export const fetchPublicationsByYear = (year) =>
 
 // --- Admin only (requires the ADMIN role - see AdminPublicationController) -------------------
 
-// `fields` is { file, title, year, month, volume, issueNumber }. The backend derives the UUID
-// filenames, page count, file size and timestamps itself - none of those are sent here.
-export const createPublication = ({ file, title, year, month, volume, issueNumber }) => {
+// Every issue is published separately in each of these languages - one PDF per (year, month,
+// language), not one PDF per month. Values must match PublicationLanguage's exact casing (the
+// backend enum round-trips via @Enumerated(EnumType.STRING), so "english" or "ENGLISH" would
+// fail Spring's enum binding).
+export const PUBLICATION_LANGUAGES = ['English', 'Telugu', 'Hindi'];
+
+// `fields` is { file, title, year, month, language, volume, issueNumber }. The backend derives
+// the UUID filenames, page count, file size and timestamps itself - none of those are sent here.
+export const createPublication = ({ file, title, year, month, language, volume, issueNumber }) => {
   const formData = new FormData();
   formData.append('file', file);
   if (title) formData.append('title', title);
   formData.append('year', year);
   formData.append('month', month);
+  formData.append('language', language || 'English');
   if (volume !== undefined && volume !== null && volume !== '') formData.append('volume', volume);
   if (issueNumber !== undefined && issueNumber !== null && issueNumber !== '') {
     formData.append('issueNumber', issueNumber);
@@ -152,6 +159,6 @@ export const replacePublicationPdf = (id, file) => {
   return authFetch(`/api/admin/publications/${id}/pdf`, { method: 'PUT', body: formData });
 };
 
-// Removes the PDF, thumbnail and meta.json for that issue.
+// Removes the PDF, thumbnail and database row for that issue/language.
 export const deletePublicationAdmin = (id) =>
   authFetch(`/api/admin/publications/${id}`, { method: 'DELETE' });

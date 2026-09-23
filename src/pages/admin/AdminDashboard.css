@@ -209,6 +209,99 @@
   background: #fafbfc;
 }
 
+.admin-pub-mobile-group-header {
+  display: none;
+}
+
+/* Year/Month cells that rowSpan across a month's three language rows */
+.admin-pub-group-cell {
+  vertical-align: middle;
+  font-weight: 700;
+  color: #14201a;
+  background: #fafbfc;
+  border-right: 1px solid #f1f5f9;
+}
+
+/* A subtler divider above each new month group than the default row border */
+.admin-pub-table-grouped tbody tr.admin-pub-group-start td {
+  border-top: 1px solid #eef1f4;
+}
+
+.admin-pub-table-grouped tbody tr:first-child td {
+  border-top: none;
+}
+
+.admin-pub-lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.admin-pub-lang-badge-code {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.admin-pub-lang-badge-english .admin-pub-lang-badge-code {
+  background: #e0edff;
+  color: #1d4ed8;
+}
+
+.admin-pub-lang-badge-telugu .admin-pub-lang-badge-code {
+  background: #fdeadb;
+  color: #c2540a;
+}
+
+.admin-pub-lang-badge-hindi .admin-pub-lang-badge-code {
+  background: #eafaf0;
+  color: #15803d;
+}
+
+.admin-pub-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.admin-pub-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.admin-pub-status-badge.published {
+  background: #ecfdf5;
+  color: #15803d;
+}
+
+.admin-pub-status-badge.published .admin-pub-status-dot {
+  background: #22c55e;
+}
+
+.admin-pub-status-badge.not-uploaded {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.admin-pub-status-badge.not-uploaded .admin-pub-status-dot {
+  background: #cbd5e1;
+}
+
 .admin-pub-actions {
   display: flex;
   gap: 6px;
@@ -349,6 +442,87 @@
   gap: 12px;
 }
 
+.admin-pub-form-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.admin-pub-field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-pub-field-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.admin-pub-lang-locked {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.admin-pub-lang-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.admin-pub-lang-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin-pub-lang-option.selected {
+  border-color: #3e6b36;
+  background: #f3f8f1;
+}
+
+.admin-pub-lang-option.taken {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: #f8fafc;
+}
+
+.admin-pub-lang-option-note {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.admin-pub-lang-option.selected .admin-pub-lang-option-note {
+  color: #3e6b36;
+}
+
+.admin-pub-empty-slot {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.admin-pub-btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  background: #eef2f7;
+  color: #14201a;
+}
+
 .admin-pub-form-error {
   display: flex;
   align-items: center;
@@ -460,7 +634,10 @@
 }
 
 @media (max-width: 560px) {
-  .admin-pub-form-row {
+  .admin-pub-form-row, .admin-pub-form-row-3 {
+    grid-template-columns: 1fr;
+  }
+  .admin-pub-lang-picker {
     grid-template-columns: 1fr;
   }
   .admin-pub-table thead {
@@ -474,8 +651,44 @@
     padding: 12px 16px;
     border-bottom: 1px solid #f1f5f9;
   }
+  .admin-pub-table tr.admin-pub-group-start {
+    border-top: 3px solid #eef1f4;
+    margin-top: 4px;
+  }
+  .admin-pub-mobile-group-header {
+    display: block;
+    padding: 10px 16px 0;
+    font-size: 13px;
+    font-weight: 800;
+    color: #3e6b36;
+  }
+  .admin-pub-mobile-group-header td {
+    display: block;
+    padding: 0;
+  }
+  .admin-pub-table tr.admin-pub-group-start {
+    border-top: none;
+  }
+  .admin-pub-group-cell {
+    display: none !important;
+  }
   .admin-pub-table td {
-    border-bottom: none;
+    border-bottom: none !important;
+    border-right: none !important;
+    background: transparent !important;
     padding: 4px 0;
+  }
+  .admin-pub-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #94a3b8;
+    margin-bottom: 2px;
+  }
+  .admin-pub-table td.admin-pub-actions {
+    flex-wrap: wrap;
   }
 }
